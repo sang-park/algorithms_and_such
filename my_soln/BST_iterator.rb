@@ -1,3 +1,13 @@
+### create an iterator class that initializes with the root node of
+### a binary search tree. Write a method called '#next' that will
+### 1. on first method call, return the smallest (left-most) node
+### 2. on each subsquent calls, return the next smallest node
+
+## This solution is constant space and constant amortized time complexity
+## another way to do this would be do do an in order traversal,
+## and store the order in an array, then just keep an index as you call
+## next. That is O(n) space and O(1) amortized time complexity.
+
 class Iterator
   def initialize(root)
     @root = root
@@ -58,31 +68,3 @@ class Node
     @val
   end
 end
-
-ten = Node.new(10)
-five = Node.new(5)
-three = Node.new(3)
-eight = Node.new(8)
-six = Node.new(6)
-seven = Node.new(7)
-twenty = Node.new(20)
-
-ten.set_children(five, twenty)
-five.set_children(three,eight)
-eight.set_children(six, nil)
-six.set_children(nil, seven)
-five.set_parent(ten)
-twenty.set_parent(ten)
-three.set_parent(five)
-eight.set_parent(five)
-six.set_parent(eight)
-seven.set_parent(six)
-
-a = Iterator.new(ten)
-p a.next
-p a.next
-p a.next
-p a.next
-p a.next
-p a.next
-p a.next
