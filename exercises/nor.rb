@@ -11,6 +11,16 @@ end
 ###Given these constraints, write methods that are equivalent to:
 
 def exclusive_disjunction(a,b)
+  # (p || q) && !(p && q)
+end
+
+def material_equivalence(a,b)
+  # (p && q) || !(p || q)
+end
+
+
+### my solutions
+def exclusive_disjunction(a,b)
   nor(nor(nor(a,b),a), nor(nor(a,b),b))
 end
 
