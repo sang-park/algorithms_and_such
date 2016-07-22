@@ -7,7 +7,6 @@
 def nor(a,b)
   !(a || b)
 end
-
 ###Given these constraints, write methods that are equivalent to:
 
 def exclusive_disjunction(a,b)
@@ -19,7 +18,9 @@ def material_equivalence(a,b)
 end
 
 
-### my solutions
+
+
+### my solution
 def exclusive_disjunction(a,b)
   nor(nor(nor(a,b),a), nor(nor(a,b),b))
 end
@@ -29,7 +30,10 @@ def material_equivalence(a,b)
 end
 
 
-### solutions from pairboarding, with helper functions
+
+### solutions from pairboarding, with helper functions to make
+### it easier to understand
+
 def my_not(p)
   nor(p, p)
 end

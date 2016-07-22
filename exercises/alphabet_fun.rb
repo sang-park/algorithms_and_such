@@ -7,8 +7,8 @@
 ## the question scales exponentially with string length
 ## optimizations can be made with memoization, but exponential time
 ## will remain
-
 require('set')
+
 def alphabet_matcher(str)
   mapping = ('0'..'25').to_a.zip(("a".."z").to_a).to_h
   string_to_num = ("a".."z").to_a.zip(('0'..'25').to_a).to_h
