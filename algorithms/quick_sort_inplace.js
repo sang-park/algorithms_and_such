@@ -27,5 +27,44 @@ var quickSort = function(arr) {
   return quickSort(left).concat(middle).concat(quickSort(right));
 };
 
-// var a = [1,5,2,4,7,2,4,7,9,10,3,5];
 // console.log(quickSort(a));
+
+//uses O(logn) space for recursion
+var qsInPlace = function(arr, start, len) {
+  if (len < 2) return arr;
+
+  start = start || 0;
+  len = len || arr.length;
+
+  var pivotIdx = partition(arr, start, len),
+      leftLen = pivotIdx - start,
+      rightLen = len - leftLen - 1;
+
+  qsInPlace(arr,start,leftLen);
+  qsInPlace(arr,pivotIdx+1, rightLen);
+};
+
+var partition = function(arr, start, length) {
+  var pivotVal = arr[start],
+      pivotIdx = start;
+
+  for (var i = pivotIdx + 1; i < start+length; i++) {
+    if (arr[i] < pivotVal) {
+      pivotIdx++;
+      var temp = arr[i];
+      arr[i] = arr[pivotIdx];
+      arr[pivotIdx] = temp;
+    }
+  }
+
+  temp = arr[start];
+  arr[start] = arr[pivotIdx];
+  arr[pivotIdx] = temp;
+  console.log(arr);
+  console.log(pivotIdx);
+  return pivotIdx;
+};
+
+var a = [6,5,2,4,9,2,4,7,7,10,3,5];
+qsInPlace(a);
+console.log(a);
