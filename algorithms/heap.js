@@ -67,6 +67,26 @@ Heap.heapifyUp = function(arr, childIdx){
   }
 };
 
-Heap.prototype.count = function () {
-  return this.store.length;
+Heap.prototype = {
+  count: function() {
+    return this.store.length;
+  },
+
+  extract: function(){
+    if (this.count() === 0) {throw "no elements to extract";}
+    var val = this.store[0];
+
+    if (this.count() > 1) {
+      this.store[0] = this.store.pop();
+      Heap.heapifyDown(this.store, 0);
+    } else {
+      this.store.pop();
+    }
+    return val;
+  },
+
+  push: function(val) {
+    this.store.push(val);
+    Heap.heapifyUp(this.store,this.count() - 1);
+  }
 };
