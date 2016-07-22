@@ -15,5 +15,5 @@ function heapsort (arr) {
   return arr.reverse();
 }
 
-var a = [63,3,4,5,8,1,2,10,32];
-console.log(heapsort(a));
+// var a = [63,3,4,5,8,1,2,10,32];
+// console.log(heapsort(a));
