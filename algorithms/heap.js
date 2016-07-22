@@ -17,8 +17,9 @@ Heap.parentIndex = function(childIndex) {
   return Math.floor((childIndex - 1) / 2);
 };
 
-Heap.heapifyDown = function(arr, parentIndex){
-  var len = arr.length;
+Heap.heapifyDown = function(arr, parentIndex, len){
+  len = len || arr.length;
+
   var childIndices = Heap.childIndices(len, parentIndex),
       leftChild = childIndices[0],
       rightChild = childIndices[1],
@@ -29,7 +30,7 @@ Heap.heapifyDown = function(arr, parentIndex){
     children.push(arr[child]);
   });
 
-  if (children.every(function(child){return parentVal > child;})){
+  if (children.every(function(child){return parentVal < child;})){
     return arr;
   }
 
@@ -37,7 +38,7 @@ Heap.heapifyDown = function(arr, parentIndex){
   if (children.length === 1){
     swapIdx = leftChild;
   } else {
-    if (children[0] > children[1]) {
+    if (children[0] < children[1]) {
       swapIdx = leftChild;
     } else {
       swapIdx = rightChild;
@@ -46,11 +47,11 @@ Heap.heapifyDown = function(arr, parentIndex){
 
   arr[parentIndex] = arr[swapIdx];
   arr[swapIdx] = parentVal;
-  Heap.heapifyDown(arr,swapIdx);
+  Heap.heapifyDown(arr,swapIdx, len);
 };
 
-Heap.heapifyUp = function(arr, childIdx){
-  var len = arr.length;
+Heap.heapifyUp = function(arr, childIdx, len){
+  len = len || arr.length;
 
   if (childIdx === 0) {return arr;}
 
@@ -63,7 +64,7 @@ Heap.heapifyUp = function(arr, childIdx){
   } else {
     arr[childIdx] = parentVal;
     arr[parentIndex] = childVal;
-    Heap.heapifyUp(arr, parentIndex);
+    Heap.heapifyUp(arr, parentIndex, len);
   }
 };
 
@@ -90,3 +91,5 @@ Heap.prototype = {
     Heap.heapifyUp(this.store,this.count() - 1);
   }
 };
+
+module.exports = Heap;
